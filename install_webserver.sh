@@ -1,5 +1,5 @@
 #!/bin/bash
-#Ubuntu 18.04.5 LTS ÏÂ°²×°nginx¡¢tomcat¡¢redis¡¢mysql×Ô¶¯½Å±¾
+#Ubuntu 18.04.5 LTS ä¸‹å®‰è£…nginxã€tomcatã€redisã€mysqlè‡ªåŠ¨è„šæœ¬
 
 default_redis_version=6.2.5
 default_nginx_version=1.20.1
@@ -12,26 +12,26 @@ tomcat_large_version=$default_tomcat_large_version
 tomcat_version=$default_tomcat_version
 
 
-#ÊÇ·ñ°²×°nginx,0 ²»°²×° £¬1 °²×°×îĞÂÎÈ¶¨°æ£¬ 2 °²×°Ö¸¶¨°æ±¾
+#æ˜¯å¦å®‰è£…nginx,0 ä¸å®‰è£… ï¼Œ1 å®‰è£…æœ€æ–°ç¨³å®šç‰ˆï¼Œ 2 å®‰è£…æŒ‡å®šç‰ˆæœ¬
 install_nginx_state=0
-#ÊÇ·ñ°²×°redis ,0 ²»°²×° £¬1 °²×°×îĞÂÎÈ¶¨°æ£¬ 2 °²×°Ö¸¶¨°æ±¾
+#æ˜¯å¦å®‰è£…redis ,0 ä¸å®‰è£… ï¼Œ1 å®‰è£…æœ€æ–°ç¨³å®šç‰ˆï¼Œ 2 å®‰è£…æŒ‡å®šç‰ˆæœ¬
 install_redis_state=0
-#ÊÇ·ñ°²×°tomcat£¬0 ²»°²×°£¬1°²×°
+#æ˜¯å¦å®‰è£…tomcatï¼Œ0 ä¸å®‰è£…ï¼Œ1å®‰è£…
 install_tomcat_state=0
-#ÊÇ·ñ°²×°mysql 5.7 £¬0 ²»°²×°£¬1°²×°
+#æ˜¯å¦å®‰è£…mysql 5.7 ï¼Œ0 ä¸å®‰è£…ï¼Œ1å®‰è£…
 install_mysql_state=0 
-#ÊÇ·ñ°²×°ab¹¤¾ß£¬0²»°²×°
+#æ˜¯å¦å®‰è£…abå·¥å…·ï¼Œ0ä¸å®‰è£…
 install_apache_ab_state=0
-#ÊÇ·ñ°²×°iperf3´ø¿í²âÊÔ¹¤¾ß£¬0²»°²×°
+#æ˜¯å¦å®‰è£…iperf3å¸¦å®½æµ‹è¯•å·¥å…·ï¼Œ0ä¸å®‰è£…
 install_iperf3_state=0
 
-#¼ì²é¶Ë¿ÚºÅÊÇ·ñ±»Õ¼ÓÃÁË
+#æ£€æŸ¥ç«¯å£å·æ˜¯å¦è¢«å ç”¨äº†
 check_port() {
     netstat -tlpn | grep "\b$1\b"
 }
-#°²×°×îĞÂÎÈ¶¨°æ±¾nginx
+#å®‰è£…æœ€æ–°ç¨³å®šç‰ˆæœ¬nginx
 function install_nginx_online(){
-	#»ñÈ¡nginx°æ±¾ºÅ
+	#è·å–nginxç‰ˆæœ¬å·
 	#nginx -V 2>&1 | grep "version" | awk '{print $3}' | awk -F/ '{print $2}'
 	#https://nginx.org/en/download.html
 	sudo apt install -y curl gnupg2 ca-certificates lsb-release ubuntu-keyring
@@ -53,15 +53,15 @@ function install_nginx_online(){
 }
 
 
-#¼ì²éÊäÈëµÄredis°æ±¾ºÅ
+#æ£€æŸ¥è¾“å…¥çš„redisç‰ˆæœ¬å·
 function select_nginx_install_option(){	
-    green "1. ²»°²×°nginx"
-    green "2. °²×°×îĞÂÎÈ¶¨°æ±¾"
-    green "3. °²×°Ä¬ÈÏnginx $default_nginx_version"
-	green "ÆäËûÖµ°²×°Ö¸¶¨°æ±¾£¬Çë¸ù¾İÌáÊ¾ÊäÈë°æ±¾"
-    red "0. ÍË³ö°²×°"
+    green "1. ä¸å®‰è£…nginx"
+    green "2. å®‰è£…æœ€æ–°ç¨³å®šç‰ˆæœ¬"
+    green "3. å®‰è£…é»˜è®¤nginx $default_nginx_version"
+	green "å…¶ä»–å€¼å®‰è£…æŒ‡å®šç‰ˆæœ¬ï¼Œè¯·æ ¹æ®æç¤ºè¾“å…¥ç‰ˆæœ¬"
+    red "0. é€€å‡ºå®‰è£…"
     echo
-    read -p "ÇëÑ¡Ôñnginx°²×°Ñ¡Ïî:" num
+    read -p "è¯·é€‰æ‹©nginxå®‰è£…é€‰é¡¹:" num
     case "$num" in
         1)
         install_nginx_state=0       
@@ -77,11 +77,11 @@ function select_nginx_install_option(){
         exit 1    
         ;;
         *)
-		read -p "ÇëÊäÈënginx°æ±¾ºÅ:" nginx_version_in
+		read -p "è¯·è¾“å…¥nginxç‰ˆæœ¬å·:" nginx_version_in
 		url=http://nginx.org/download/nginx-$nginx_version_in.tar.gz
 		isExist=$(curl -s -m 5 -IL $url|grep 200)
 		if (["$isExist" == ""]);then
-			echo "ÊäÈëµÄ°æ±¾²»´æÔÚ"
+			echo "è¾“å…¥çš„ç‰ˆæœ¬ä¸å­˜åœ¨"
 			select_nginx_install_option
 		fi
         install_nginx_state=2
@@ -90,7 +90,7 @@ function select_nginx_install_option(){
         esac	
 }
 
-#±àÒë°²×°nginx 1.20.1
+#ç¼–è¯‘å®‰è£…nginx 1.20.1
 function install_nginx(){
 	sudo apt-get update
 	sudo apt-get install -y gcc
@@ -105,7 +105,7 @@ function install_nginx(){
 	#sudo ./configure --user=nginx --prefix=/usr/local/nginx --with-http_ssl_module --with-http_stub_status_module --with-pcre --with-stream
 	sudo make -j
 	sudo make install
-	#Ìí¼ÓÓÃ»§
+	#æ·»åŠ ç”¨æˆ·
 	#useradd -s /sbin/nologin -M nginx
 sudo tee /lib/systemd/system/nginx.service >/dev/null <<EOF
 [Unit]
@@ -126,10 +126,10 @@ EOF
 
 	echo "Install nginx $nginx_version done, installation directory is /usr/local/nginx"
 }
-#°²×°tomcat 8.5.70
+#å®‰è£…tomcat 8.5.70
 function install_tomcat(){
 	sudo apt-get update
-	#Ã»ÓĞ°²×°javaÊ±×Ô¶¯°²×°open java 8 
+	#æ²¡æœ‰å®‰è£…javaæ—¶è‡ªåŠ¨å®‰è£…open java 8 
 	if ! [ -x "$(command -v java)" ];then
 	    sudo apt-get install -y openjdk-8-jdk
 	fi
@@ -164,14 +164,14 @@ EOF
 	echo "Install tomcat $tomcat_version done, installation directory is /usr/local/tomcat"
 }
 
-#¼ì²éÊäÈëµÄtomcat°æ±¾ºÅ
+#æ£€æŸ¥è¾“å…¥çš„tomcatç‰ˆæœ¬å·
 function select_tomcat_install_option(){
-    green "1. ²»°²×°tomcat"
-    green "2. °²×°tomcat $default_tomcat_version"
-	green "ÆäËûÖµ°²×°Ö¸¶¨°æ±¾£¬Çë¸ù¾İÌáÊ¾ÊäÈë°æ±¾"
-    red "0. ÍË³ö°²×°"
+    green "1. ä¸å®‰è£…tomcat"
+    green "2. å®‰è£…tomcat $default_tomcat_version"
+	green "å…¶ä»–å€¼å®‰è£…æŒ‡å®šç‰ˆæœ¬ï¼Œè¯·æ ¹æ®æç¤ºè¾“å…¥ç‰ˆæœ¬"
+    red "0. é€€å‡ºå®‰è£…"
     echo
-    read -p "ÇëÑ¡Ôñtomcat°²×°Ñ¡Ïî:" num
+    read -p "è¯·é€‰æ‹©tomcatå®‰è£…é€‰é¡¹:" num
     case "$num" in
         1)
         install_tomcat_state=0      
@@ -185,12 +185,12 @@ function select_tomcat_install_option(){
         exit 1    
         ;;
         *)
-		read -p "ÇëÊäÈëtomcat´ó°æ±¾ºÅ(8,9,10):" tomcat_large_version_in	
-		read -p "ÇëÊäÈëtomcat°æ±¾ºÅ:" tomcat_version_in
+		read -p "è¯·è¾“å…¥tomcatå¤§ç‰ˆæœ¬å·(8,9,10):" tomcat_large_version_in	
+		read -p "è¯·è¾“å…¥tomcatç‰ˆæœ¬å·:" tomcat_version_in
 		url=https://mirrors.cnnic.cn/apache/tomcat/tomcat-$tomcat_large_version_in/v$tomcat_version_in/bin/apache-tomcat-$tomcat_version_in.tar.gz
 		isExist=$(curl -s -m 5 -IL $url|grep 200)
 		if (["$isExist" == ""]);then
-			echo "ÊäÈëµÄ°æ±¾²»´æÔÚ"
+			echo "è¾“å…¥çš„ç‰ˆæœ¬ä¸å­˜åœ¨"
 			select_tomcat_install_option
 		fi
         install_tomcat_state=1
@@ -200,13 +200,13 @@ function select_tomcat_install_option(){
         esac	
 }
 
-#°²×°mysql Ñ¡Ôñ°æ±¾
+#å®‰è£…mysql é€‰æ‹©ç‰ˆæœ¬
 function select_mysql_install_option(){
-    green "1. ²»°²×°mysql"
-    green "2. °²×°mysql 5.7"
-    red "0. ÍË³ö°²×°"
+    green "1. ä¸å®‰è£…mysql"
+    green "2. å®‰è£…mysql 5.7"
+    red "0. é€€å‡ºå®‰è£…"
     echo
-    read -p "ÇëÑ¡Ôñmysql°²×°Ñ¡Ïî:" num
+    read -p "è¯·é€‰æ‹©mysqlå®‰è£…é€‰é¡¹:" num
     case "$num" in
         1)
         install_mysql_state=0      
@@ -218,19 +218,19 @@ function select_mysql_install_option(){
         exit 1
         ;;
         *)
-		echo "ÇëÑ¡ÔñÕıÈ·µÄÖµ"
+		echo "è¯·é€‰æ‹©æ­£ç¡®çš„å€¼"
 		check_mysql_version
         ;;
         esac	
 }
-#°²×°mysql 5.7
+#å®‰è£…mysql 5.7
 function install_mysql(){
-	#²é¿´¿ÉÓÃ°æ±¾
+	#æŸ¥çœ‹å¯ç”¨ç‰ˆæœ¬
 	#apt-cache search mysql | grep mysql-server
-	# °²×°
+	# å®‰è£…
 	sudo apt-get -y install mysql-server-5.7
 }
-#Ğ¶ÔØmysql
+#å¸è½½mysql
 function remove_mysql(){
 	sudo apt-get autoremove -y --purge mysql-server
 	sudo apt-get autoremove -y --purge mysql-server-*
@@ -244,7 +244,7 @@ function remove_mysql(){
 	sudo apt autoclean
 }
 
-#°²×°×îĞÂÎÈ¶¨°æredis
+#å®‰è£…æœ€æ–°ç¨³å®šç‰ˆredis
 function install_redis_online(){
 	echo -e "\n" | sudo add-apt-repository ppa:redislabs/redis
 	sleep 1
@@ -268,15 +268,15 @@ function install_redis_online(){
 
 	echo "Install redis $redis_version done"
 }
-#°²×°redis Ñ¡Ôñ°æ±¾
+#å®‰è£…redis é€‰æ‹©ç‰ˆæœ¬
 function select_redis_install_option(){
-    green "1. ²»°²×°redis"
-    green "2. °²×°×îĞÂÎÈ¶¨°æ±¾"
-    green "3. °²×°redis $default_redis_version"
-	green "ÆäËûÖµ°²×°Ö¸¶¨°æ±¾£¬Çë¸ù¾İÌáÊ¾ÊäÈë°æ±¾"
-    red "0. ÍË³ö°²×°"
+    green "1. ä¸å®‰è£…redis"
+    green "2. å®‰è£…æœ€æ–°ç¨³å®šç‰ˆæœ¬"
+    green "3. å®‰è£…redis $default_redis_version"
+	green "å…¶ä»–å€¼å®‰è£…æŒ‡å®šç‰ˆæœ¬ï¼Œè¯·æ ¹æ®æç¤ºè¾“å…¥ç‰ˆæœ¬"
+    red "0. é€€å‡ºå®‰è£…"
     echo
-    read -p "ÇëÑ¡Ôñredis°²×°Ñ¡Ïî:" num
+    read -p "è¯·é€‰æ‹©rediså®‰è£…é€‰é¡¹:" num
     case "$num" in
         1)
         install_redis_state=0      
@@ -292,11 +292,11 @@ function select_redis_install_option(){
         exit 1
         ;;
         *)
-		read -p "ÇëÊäÈëredis°æ±¾ºÅ:" redis_version_in
+		read -p "è¯·è¾“å…¥redisç‰ˆæœ¬å·:" redis_version_in
 		url=https://download.redis.io/releases/redis-$redis_version_in.tar.gz
 		isExist=$(curl -s -m 5 -IL $url|grep 200)
 		if (["$isExist" == ""]);then
-			echo "ÊäÈëµÄ°æ±¾²»´æÔÚ"
+			echo "è¾“å…¥çš„ç‰ˆæœ¬ä¸å­˜åœ¨"
 			select_redis_install_option
 		fi
         install_redis_state=2
@@ -304,7 +304,7 @@ function select_redis_install_option(){
         ;;
         esac	
 }
-#±àÒë°²×°redis 6.2.5
+#ç¼–è¯‘å®‰è£…redis 6.2.5
 function isntall_redis(){
 	sudo apt-get update
 	sudo apt-get install -y gcc
@@ -317,7 +317,7 @@ function isntall_redis(){
 	sudo make install PREFIX=/usr/local/redis
 	sudo mv ../redis.conf /usr/local/redis/
 	#sudo mv redis.conf /usr/local/redis/
-	#×Ô¶¨ÒåÈÕÖ¾Ä¿Â¼£¬ÏÈ´´½¨ºÃÄ¿Â¼£¬²»È»»áÆô¶¯Ê§°Ü
+	#è‡ªå®šä¹‰æ—¥å¿—ç›®å½•ï¼Œå…ˆåˆ›å»ºå¥½ç›®å½•ï¼Œä¸ç„¶ä¼šå¯åŠ¨å¤±è´¥
 	sudo mkdir /usr/local/redis/log
 	sudo tee /lib/systemd/system/redis.service >/dev/null <<EOF
 [Unit]
@@ -399,24 +399,24 @@ function reload_start_menu(){
 function start_menu(){
     clear
     green "==============================================="
-    green " ½éÉÜ: Ò»¼ü°²×°nginx + tomcat + redis + mysql µÈ¹¤¾ß½Å±¾"
-    green " ÏµÍ³: Ubuntu18.04"
+    green " ä»‹ç»: ä¸€é”®å®‰è£…nginx + tomcat + redis + mysql ç­‰å·¥å…·è„šæœ¬"
+    green " ç³»ç»Ÿ: Ubuntu18.04"
     green "==============================================="
 
-    green "1. °²×°nginx"
-    green "2. °²×°tomcat"
-    green "3. °²×°redis"
-    green "4. °²×°mysql"
-    green "5. °²×°apche abÑ¹²â¹¤¾ß"
-    green "6. °²×°iperf3´ø¿í²âÊÔ¹¤¾ß"
-	green "Ö¸¶¨°²×°¶à¸öÈí¼şÊ±ÊäÈëÊı×ÖÓÃ¿Õ¸ñ¸ô¿ª"
-	red "0. ÍË³ö°²×°"
+    green "1. å®‰è£…nginx"
+    green "2. å®‰è£…tomcat"
+    green "3. å®‰è£…redis"
+    green "4. å®‰è£…mysql"
+    green "5. å®‰è£…apche abå‹æµ‹å·¥å…·"
+    green "6. å®‰è£…iperf3å¸¦å®½æµ‹è¯•å·¥å…·"
+	green "æŒ‡å®šå®‰è£…å¤šä¸ªè½¯ä»¶æ—¶è¾“å…¥æ•°å­—ç”¨ç©ºæ ¼éš”å¼€"
+	red "0. é€€å‡ºå®‰è£…"
     echo
 
-	read -p "ÇëÊäÈë¶ÔÓ¦µÄ±àºÅ£¬¶à¸ö±àºÅÒÔ¿Õ¸ñ¸ô¿ª:" -a vars
+	read -p "è¯·è¾“å…¥å¯¹åº”çš„ç¼–å·ï¼Œå¤šä¸ªç¼–å·ä»¥ç©ºæ ¼éš”å¼€:" -a vars
 	for var in ${vars[@]};do
 	     if [ $var == 0 ];then
-    		echo "ÖÕÖ¹°²×°" >&2
+    		echo "ç»ˆæ­¢å®‰è£…" >&2
 	     	exit 1
 	     fi 
 	done
@@ -474,7 +474,7 @@ function start_menu(){
 	if [ $install_iperf3_state == 1 ];then
 		install_iperf3
 	fi
-    green "°²×°Íê³É"
+    green "å®‰è£…å®Œæˆ"
 	if [ $install_nginx_state == 1 ] || [ $install_nginx_state == 2 ];then
 		green "--------------nginx verion-------------"
     	nginx -v
