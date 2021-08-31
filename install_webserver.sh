@@ -1,5 +1,5 @@
 #!/bin/bash
-#Ubuntu 18.04.5 LTS œ¬∞≤◊∞nginx°¢tomcat°¢redis°¢mysql◊‘∂ØΩ≈±æ
+#Ubuntu 18.04.5 LTS ‰∏ãÂÆâË£Önginx„ÄÅtomcat„ÄÅredis„ÄÅmysqlËá™Âä®ËÑöÊú¨
 
 default_redis_version=6.2.5
 default_nginx_version=1.20.1
@@ -12,56 +12,56 @@ tomcat_large_version=$default_tomcat_large_version
 tomcat_version=$default_tomcat_version
 
 
-# «∑Ò∞≤◊∞nginx,0 ≤ª∞≤◊∞ £¨1 ∞≤◊∞◊Ó–¬Œ»∂®∞Ê£¨ 2 ∞≤◊∞÷∏∂®∞Ê±æ
+#ÊòØÂê¶ÂÆâË£Önginx,0 ‰∏çÂÆâË£Ö Ôºå1 ÂÆâË£ÖÊúÄÊñ∞Á®≥ÂÆöÁâàÔºå 2 ÂÆâË£ÖÊåáÂÆöÁâàÊú¨
 install_nginx_state=0
-# «∑Ò∞≤◊∞redis ,0 ≤ª∞≤◊∞ £¨1 ∞≤◊∞◊Ó–¬Œ»∂®∞Ê£¨ 2 ∞≤◊∞÷∏∂®∞Ê±æ
+#ÊòØÂê¶ÂÆâË£Öredis ,0 ‰∏çÂÆâË£Ö Ôºå1 ÂÆâË£ÖÊúÄÊñ∞Á®≥ÂÆöÁâàÔºå 2 ÂÆâË£ÖÊåáÂÆöÁâàÊú¨
 install_redis_state=0
-# «∑Ò∞≤◊∞tomcat£¨0 ≤ª∞≤◊∞£¨1∞≤◊∞
+#ÊòØÂê¶ÂÆâË£ÖtomcatÔºå0 ‰∏çÂÆâË£ÖÔºå1ÂÆâË£Ö
 install_tomcat_state=0
-# «∑Ò∞≤◊∞mysql 5.7 £¨0 ≤ª∞≤◊∞£¨1∞≤◊∞
+#ÊòØÂê¶ÂÆâË£Ömysql 5.7 Ôºå0 ‰∏çÂÆâË£ÖÔºå1ÂÆâË£Ö
 install_mysql_state=0 
-# «∑Ò∞≤◊∞abπ§æﬂ£¨0≤ª∞≤◊∞
+#ÊòØÂê¶ÂÆâË£ÖabÂ∑•ÂÖ∑Ôºå0‰∏çÂÆâË£Ö
 install_apache_ab_state=0
-# «∑Ò∞≤◊∞iperf3¥¯øÌ≤‚ ‘π§æﬂ£¨0≤ª∞≤◊∞
+#ÊòØÂê¶ÂÆâË£Öiperf3Â∏¶ÂÆΩÊµãËØïÂ∑•ÂÖ∑Ôºå0‰∏çÂÆâË£Ö
 install_iperf3_state=0
 
-#ºÏ≤È∂Àø⁄∫≈ «∑Ò±ª’º”√¡À
+#Ê£ÄÊü•Á´ØÂè£Âè∑ÊòØÂê¶Ë¢´Âç†Áî®‰∫Ü
 check_port() {
     netstat -tlpn | grep "\b$1\b"
 }
-#∞≤◊∞◊Ó–¬Œ»∂®∞Ê±ænginx
+#ÂÆâË£ÖÊúÄÊñ∞Á®≥ÂÆöÁâàÊú¨nginx
 function install_nginx_online(){
-	#ªÒ»°nginx∞Ê±æ∫≈
-	#nginx -V 2>&1 | grep "version" | awk '{print $3}' | awk -F/ '{print $2}'
-	#https://nginx.org/en/download.html
-	sudo apt install -y curl gnupg2 ca-certificates lsb-release ubuntu-keyring
-	curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor \
-	    | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
-	gpg --dry-run --quiet --import --import-options import-show /usr/share/keyrings/nginx-archive-keyring.gpg
-	echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \
-	http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" \
-	    | sudo tee /etc/apt/sources.list.d/nginx.list
-	echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" \
-	    | sudo tee /etc/apt/preferences.d/99nginx
-	sudo apt update
-	sudo apt install -y nginx
-	#sudo systemctl daemon-reload
-	#sudo systemctl enable nginx
-	sudo systemctl start nginx
+    #Ëé∑ÂèñnginxÁâàÊú¨Âè∑
+    #nginx -V 2>&1 | grep "version" | awk '{print $3}' | awk -F/ '{print $2}'
+    #https://nginx.org/en/download.html
+    sudo apt install -y curl gnupg2 ca-certificates lsb-release ubuntu-keyring
+    curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor \
+        | sudo tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+    gpg --dry-run --quiet --import --import-options import-show /usr/share/keyrings/nginx-archive-keyring.gpg
+    echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] \
+    http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" \
+        | sudo tee /etc/apt/sources.list.d/nginx.list
+    echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" \
+        | sudo tee /etc/apt/preferences.d/99nginx
+    sudo apt update
+    sudo apt install -y nginx
+    #sudo systemctl daemon-reload
+    #sudo systemctl enable nginx
+    sudo systemctl start nginx
 
-	echo "Install nginx done, installation directory is /usr/local/nginx"
+    echo "Install nginx done, installation directory is /usr/local/nginx"
 }
 
 
-#ºÏ≤È ‰»Îµƒredis∞Ê±æ∫≈
-function select_nginx_install_option(){	
-    green "1. ≤ª∞≤◊∞nginx"
-    green "2. ∞≤◊∞◊Ó–¬Œ»∂®∞Ê±æ"
-    green "3. ∞≤◊∞ƒ¨»œnginx $default_nginx_version"
-	green "∆‰À˚÷µ∞≤◊∞÷∏∂®∞Ê±æ£¨«Î∏˘æ›Ã· æ ‰»Î∞Ê±æ"
-    red "0. ÕÀ≥ˆ∞≤◊∞"
+#Ê£ÄÊü•ËæìÂÖ•ÁöÑredisÁâàÊú¨Âè∑
+function select_nginx_install_option(){ 
+    green "1. ‰∏çÂÆâË£Önginx"
+    green "2. ÂÆâË£ÖÊúÄÊñ∞Á®≥ÂÆöÁâàÊú¨"
+    green "3. ÂÆâË£ÖÈªòËÆ§nginx $default_nginx_version"
+    green "ÂÖ∂‰ªñÂÄºÂÆâË£ÖÊåáÂÆöÁâàÊú¨ÔºåËØ∑Ê†πÊçÆÊèêÁ§∫ËæìÂÖ•ÁâàÊú¨"
+    red "0. ÈÄÄÂá∫ÂÆâË£Ö"
     echo
-    read -p "«Î—°‘Ònginx∞≤◊∞—°œÓ:" num
+    read -p "ËØ∑ÈÄâÊã©nginxÂÆâË£ÖÈÄâÈ°π:" num
     case "$num" in
         1)
         install_nginx_state=0       
@@ -77,36 +77,36 @@ function select_nginx_install_option(){
         exit 1    
         ;;
         *)
-		read -p "«Î ‰»Înginx∞Ê±æ∫≈:" nginx_version_in
-		url=http://nginx.org/download/nginx-$nginx_version_in.tar.gz
-		isExist=$(curl -s -m 5 -IL $url|grep 200)
-		if (["$isExist" == ""]);then
-			echo " ‰»Îµƒ∞Ê±æ≤ª¥Ê‘⁄"
-			select_nginx_install_option
-		fi
+        read -p "ËØ∑ËæìÂÖ•nginxÁâàÊú¨Âè∑:" nginx_version_in
+        url=http://nginx.org/download/nginx-$nginx_version_in.tar.gz
+        isExist=$(curl -s -m 5 -IL $url|grep 200)
+        if (["$isExist" == ""]);then
+            echo "ËæìÂÖ•ÁöÑÁâàÊú¨‰∏çÂ≠òÂú®"
+            select_nginx_install_option
+        fi
         install_nginx_state=2
-		nginx_version=$nginx_version_in
+        nginx_version=$nginx_version_in
         ;;
-        esac	
+        esac    
 }
 
-#±‡“Î∞≤◊∞nginx 1.20.1
+#ÁºñËØëÂÆâË£Önginx 1.20.1
 function install_nginx(){
-	sudo apt-get update
-	sudo apt-get install -y gcc
-	sudo apt-get install -y zlib1g zlib1g-dev
-	sudo apt-get install -y openssl libssl-dev
-	sudo apt-get install -y libpcre3 libpcre3-dev
-	sudo apt-get install -y make
-	sudo wget https://nginx.org/download/nginx-$nginx_version.tar.gz
-	sudo tar xzf nginx-$nginx_version.tar.gz
-	cd nginx-$nginx_version/
-	sudo ./configure --with-http_ssl_module
-	#sudo ./configure --user=nginx --prefix=/usr/local/nginx --with-http_ssl_module --with-http_stub_status_module --with-pcre --with-stream
-	sudo make -j
-	sudo make install
-	#ÃÌº””√ªß
-	#useradd -s /sbin/nologin -M nginx
+    sudo apt-get update
+    sudo apt-get install -y gcc
+    sudo apt-get install -y zlib1g zlib1g-dev
+    sudo apt-get install -y openssl libssl-dev
+    sudo apt-get install -y libpcre3 libpcre3-dev
+    sudo apt-get install -y make
+    sudo wget https://nginx.org/download/nginx-$nginx_version.tar.gz
+    sudo tar xzf nginx-$nginx_version.tar.gz
+    cd nginx-$nginx_version/
+    sudo ./configure --with-http_ssl_module
+    #sudo ./configure --user=nginx --prefix=/usr/local/nginx --with-http_ssl_module --with-http_stub_status_module --with-pcre --with-stream
+    sudo make -j
+    sudo make install
+    #Ê∑ªÂä†Áî®Êà∑
+    #useradd -s /sbin/nologin -M nginx
 sudo tee /lib/systemd/system/nginx.service >/dev/null <<EOF
 [Unit]
 Description=nginx server
@@ -120,22 +120,22 @@ ExecStop=/usr/local/nginx/sbin/nginx -s stop
 [Install]
 WantedBy=multi-user.target
 EOF
-	sudo systemctl daemon-reload
-	sudo systemctl enable nginx
-	sudo systemctl start nginx
+    sudo systemctl daemon-reload
+    sudo systemctl enable nginx
+    sudo systemctl start nginx
 
-	echo "Install nginx $nginx_version done, installation directory is /usr/local/nginx"
+    echo "Install nginx $nginx_version done, installation directory is /usr/local/nginx"
 }
-#∞≤◊∞tomcat 8.5.70
+#ÂÆâË£Ötomcat 8.5.70
 function install_tomcat(){
-	sudo apt-get update
-	#√ª”–∞≤◊∞java ±◊‘∂Ø∞≤◊∞open java 8 
-	if ! [ -x "$(command -v java)" ];then
-	    sudo apt-get install -y openjdk-8-jdk
-	fi
-	sudo wget https://mirrors.cnnic.cn/apache/tomcat/tomcat-$tomcat_large_version/v$tomcat_version/bin/apache-tomcat-$tomcat_version.tar.gz
-	sudo tar xzf apache-tomcat-$tomcat_version.tar.gz
-	sudo mv apache-tomcat-$tomcat_version /usr/local/tomcat
+    sudo apt-get update
+    #Ê≤°ÊúâÂÆâË£ÖjavaÊó∂Ëá™Âä®ÂÆâË£Öopen java 8 
+    if ! [ -x "$(command -v java)" ];then
+        sudo apt-get install -y openjdk-8-jdk
+    fi
+    sudo wget https://mirrors.cnnic.cn/apache/tomcat/tomcat-$tomcat_large_version/v$tomcat_version/bin/apache-tomcat-$tomcat_version.tar.gz
+    sudo tar xzf apache-tomcat-$tomcat_version.tar.gz
+    sudo mv apache-tomcat-$tomcat_version /usr/local/tomcat
 sudo tee /usr/local/tomcat/bin/setenv.sh >/dev/null <<EOF
 CATALINA_PID="/usr/local/tomcat/tomcat.pid"
 EOF
@@ -157,21 +157,21 @@ PrivateTmp=true
 [Install]
 WantedBy=multi-user.target
 EOF
-	sudo systemctl daemon-reload
-	sudo systemctl enable tomcat
-	sudo systemctl start tomcat
+    sudo systemctl daemon-reload
+    sudo systemctl enable tomcat
+    sudo systemctl start tomcat
 
-	echo "Install tomcat $tomcat_version done, installation directory is /usr/local/tomcat"
+    echo "Install tomcat $tomcat_version done, installation directory is /usr/local/tomcat"
 }
 
-#ºÏ≤È ‰»Îµƒtomcat∞Ê±æ∫≈
+#Ê£ÄÊü•ËæìÂÖ•ÁöÑtomcatÁâàÊú¨Âè∑
 function select_tomcat_install_option(){
-    green "1. ≤ª∞≤◊∞tomcat"
-    green "2. ∞≤◊∞tomcat $default_tomcat_version"
-	green "∆‰À˚÷µ∞≤◊∞÷∏∂®∞Ê±æ£¨«Î∏˘æ›Ã· æ ‰»Î∞Ê±æ"
-    red "0. ÕÀ≥ˆ∞≤◊∞"
+    green "1. ‰∏çÂÆâË£Ötomcat"
+    green "2. ÂÆâË£Ötomcat $default_tomcat_version"
+    green "ÂÖ∂‰ªñÂÄºÂÆâË£ÖÊåáÂÆöÁâàÊú¨ÔºåËØ∑Ê†πÊçÆÊèêÁ§∫ËæìÂÖ•ÁâàÊú¨"
+    red "0. ÈÄÄÂá∫ÂÆâË£Ö"
     echo
-    read -p "«Î—°‘Òtomcat∞≤◊∞—°œÓ:" num
+    read -p "ËØ∑ÈÄâÊã©tomcatÂÆâË£ÖÈÄâÈ°π:" num
     case "$num" in
         1)
         install_tomcat_state=0      
@@ -185,28 +185,28 @@ function select_tomcat_install_option(){
         exit 1    
         ;;
         *)
-		read -p "«Î ‰»Îtomcat¥Û∞Ê±æ∫≈(8,9,10):" tomcat_large_version_in	
-		read -p "«Î ‰»Îtomcat∞Ê±æ∫≈:" tomcat_version_in
-		url=https://mirrors.cnnic.cn/apache/tomcat/tomcat-$tomcat_large_version_in/v$tomcat_version_in/bin/apache-tomcat-$tomcat_version_in.tar.gz
-		isExist=$(curl -s -m 5 -IL $url|grep 200)
-		if (["$isExist" == ""]);then
-			echo " ‰»Îµƒ∞Ê±æ≤ª¥Ê‘⁄"
-			select_tomcat_install_option
-		fi
+        read -p "ËØ∑ËæìÂÖ•tomcatÂ§ßÁâàÊú¨Âè∑(8,9,10):" tomcat_large_version_in    
+        read -p "ËØ∑ËæìÂÖ•tomcatÁâàÊú¨Âè∑:" tomcat_version_in
+        url=https://mirrors.cnnic.cn/apache/tomcat/tomcat-$tomcat_large_version_in/v$tomcat_version_in/bin/apache-tomcat-$tomcat_version_in.tar.gz
+        isExist=$(curl -s -m 5 -IL $url|grep 200)
+        if (["$isExist" == ""]);then
+            echo "ËæìÂÖ•ÁöÑÁâàÊú¨‰∏çÂ≠òÂú®"
+            select_tomcat_install_option
+        fi
         install_tomcat_state=1
-		tomcat_version=$tomcat_version_in
-		tomcat_large_version=$tomcat_large_version_in
+        tomcat_version=$tomcat_version_in
+        tomcat_large_version=$tomcat_large_version_in
         ;;
-        esac	
+        esac    
 }
 
-#∞≤◊∞mysql —°‘Ò∞Ê±æ
+#ÂÆâË£Ömysql ÈÄâÊã©ÁâàÊú¨
 function select_mysql_install_option(){
-    green "1. ≤ª∞≤◊∞mysql"
-    green "2. ∞≤◊∞mysql 5.7"
-    red "0. ÕÀ≥ˆ∞≤◊∞"
+    green "1. ‰∏çÂÆâË£Ömysql"
+    green "2. ÂÆâË£Ömysql 5.7"
+    red "0. ÈÄÄÂá∫ÂÆâË£Ö"
     echo
-    read -p "«Î—°‘Òmysql∞≤◊∞—°œÓ:" num
+    read -p "ËØ∑ÈÄâÊã©mysqlÂÆâË£ÖÈÄâÈ°π:" num
     case "$num" in
         1)
         install_mysql_state=0      
@@ -218,65 +218,65 @@ function select_mysql_install_option(){
         exit 1
         ;;
         *)
-		echo "«Î—°‘Ò’˝»∑µƒ÷µ"
-		check_mysql_version
+        echo "ËØ∑ÈÄâÊã©Ê≠£Á°ÆÁöÑÂÄº"
+        check_mysql_version
         ;;
-        esac	
+        esac    
 }
-#∞≤◊∞mysql 5.7
+#ÂÆâË£Ömysql 5.7
 function install_mysql(){
-	#≤Èø¥ø…”√∞Ê±æ
-	#apt-cache search mysql | grep mysql-server
-	# ∞≤◊∞
-	sudo apt-get -y install mysql-server-5.7
+    #Êü•ÁúãÂèØÁî®ÁâàÊú¨
+    #apt-cache search mysql | grep mysql-server
+    # ÂÆâË£Ö
+    sudo apt-get -y install mysql-server-5.7
 }
-#–∂‘ÿmysql
+#Âç∏ËΩΩmysql
 function remove_mysql(){
-	sudo apt-get autoremove -y --purge mysql-server
-	sudo apt-get autoremove -y --purge mysql-server-*
-	sudo apt-get autoremove -y --purge mysql-client
-	sudo apt-get autoremove -y --purge mysql-client-*
-	sudo apt-get remove -y mysql-common
-	dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P
-	sudo rm -rf /etc/mysql
-	sudo rm -rf /var/lib/mysql
-	sudo apt autoremove
-	sudo apt autoclean
+    sudo apt-get autoremove -y --purge mysql-server
+    sudo apt-get autoremove -y --purge mysql-server-*
+    sudo apt-get autoremove -y --purge mysql-client
+    sudo apt-get autoremove -y --purge mysql-client-*
+    sudo apt-get remove -y mysql-common
+    dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P
+    sudo rm -rf /etc/mysql
+    sudo rm -rf /var/lib/mysql
+    sudo apt autoremove
+    sudo apt autoclean
 }
 
-#∞≤◊∞◊Ó–¬Œ»∂®∞Êredis
+#ÂÆâË£ÖÊúÄÊñ∞Á®≥ÂÆöÁâàredis
 function install_redis_online(){
-	echo -e "\n" | sudo add-apt-repository ppa:redislabs/redis
-	sleep 1
-	sudo apt-get update
-	sudo apt-get install -y redis
-	# Change "supervised no" so "supervised systemd"? Question is unclear
-	# If "#bind 127.0.0.1 ::1", change to "bind 127.0.0.1 ::1"
-	#sed -e 's/^supervised no/supervised systemd/' -e 's/^# requirepass foobared/requirepass rU9frVwMbLyG/' /etc/redis/redis.conf >/etc/redis/redis.conf.new
-	#mv /etc/redis/redis.conf /etc/redis/redis.conf.$(date +%y%b%d-%H%M%S)
-	#mv /etc/redis/redis.conf.new /etc/redis/redis.conf
-	sudo systemctl restart redis-server
-	# give redis-server a second to wake up
-	sleep 1
-	if [[ "$( echo 'ping' | /usr/bin/redis-cli )" == "PONG" ]] ; then
-	    echo "ping worked"
-	else
-	    echo "ping FAILED"
-	fi
-	sudo systemctl status redis-server
-	sudo systemctl enable redis
+    echo -e "\n" | sudo add-apt-repository ppa:redislabs/redis
+    sleep 1
+    sudo apt-get update
+    sudo apt-get install -y redis
+    # Change "supervised no" so "supervised systemd"? Question is unclear
+    # If "#bind 127.0.0.1 ::1", change to "bind 127.0.0.1 ::1"
+    #sed -e 's/^supervised no/supervised systemd/' -e 's/^# requirepass foobared/requirepass rU9frVwMbLyG/' /etc/redis/redis.conf >/etc/redis/redis.conf.new
+    #mv /etc/redis/redis.conf /etc/redis/redis.conf.$(date +%y%b%d-%H%M%S)
+    #mv /etc/redis/redis.conf.new /etc/redis/redis.conf
+    sudo systemctl restart redis-server
+    # give redis-server a second to wake up
+    sleep 1
+    if [[ "$( echo 'ping' | /usr/bin/redis-cli )" == "PONG" ]] ; then
+        echo "ping worked"
+    else
+        echo "ping FAILED"
+    fi
+    sudo systemctl status redis-server
+    sudo systemctl enable redis
 
-	echo "Install redis $redis_version done"
+    echo "Install redis $redis_version done"
 }
-#∞≤◊∞redis —°‘Ò∞Ê±æ
+#ÂÆâË£Öredis ÈÄâÊã©ÁâàÊú¨
 function select_redis_install_option(){
-    green "1. ≤ª∞≤◊∞redis"
-    green "2. ∞≤◊∞◊Ó–¬Œ»∂®∞Ê±æ"
-    green "3. ∞≤◊∞redis $default_redis_version"
-	green "∆‰À˚÷µ∞≤◊∞÷∏∂®∞Ê±æ£¨«Î∏˘æ›Ã· æ ‰»Î∞Ê±æ"
-    red "0. ÕÀ≥ˆ∞≤◊∞"
+    green "1. ‰∏çÂÆâË£Öredis"
+    green "2. ÂÆâË£ÖÊúÄÊñ∞Á®≥ÂÆöÁâàÊú¨"
+    green "3. ÂÆâË£Öredis $default_redis_version"
+    green "ÂÖ∂‰ªñÂÄºÂÆâË£ÖÊåáÂÆöÁâàÊú¨ÔºåËØ∑Ê†πÊçÆÊèêÁ§∫ËæìÂÖ•ÁâàÊú¨"
+    red "0. ÈÄÄÂá∫ÂÆâË£Ö"
     echo
-    read -p "«Î—°‘Òredis∞≤◊∞—°œÓ:" num
+    read -p "ËØ∑ÈÄâÊã©redisÂÆâË£ÖÈÄâÈ°π:" num
     case "$num" in
         1)
         install_redis_state=0      
@@ -292,34 +292,34 @@ function select_redis_install_option(){
         exit 1
         ;;
         *)
-		read -p "«Î ‰»Îredis∞Ê±æ∫≈:" redis_version_in
-		url=https://download.redis.io/releases/redis-$redis_version_in.tar.gz
-		isExist=$(curl -s -m 5 -IL $url|grep 200)
-		if (["$isExist" == ""]);then
-			echo " ‰»Îµƒ∞Ê±æ≤ª¥Ê‘⁄"
-			select_redis_install_option
-		fi
+        read -p "ËØ∑ËæìÂÖ•redisÁâàÊú¨Âè∑:" redis_version_in
+        url=https://download.redis.io/releases/redis-$redis_version_in.tar.gz
+        isExist=$(curl -s -m 5 -IL $url|grep 200)
+        if (["$isExist" == ""]);then
+            echo "ËæìÂÖ•ÁöÑÁâàÊú¨‰∏çÂ≠òÂú®"
+            select_redis_install_option
+        fi
         install_redis_state=2
-		redis_version=$redis_version_in
+        redis_version=$redis_version_in
         ;;
-        esac	
+        esac    
 }
-#±‡“Î∞≤◊∞redis 6.2.5
+#ÁºñËØëÂÆâË£Öredis 6.2.5
 function isntall_redis(){
-	sudo apt-get update
-	sudo apt-get install -y gcc
-	#sudo apt-get install -y pkg-config
-	sudo apt-get install -y make
-	sudo wget https://download.redis.io/releases/redis-$redis_version.tar.gz
-	sudo tar xzf redis-$redis_version.tar.gz
-	cd redis-$redis_version/
-	sudo make -j
-	sudo make install PREFIX=/usr/local/redis
-	sudo mv ../redis.conf /usr/local/redis/
-	#sudo mv redis.conf /usr/local/redis/
-	#◊‘∂®“Â»’÷æƒø¬º£¨œ»¥¥Ω®∫√ƒø¬º£¨≤ª»ªª·∆Ù∂Ø ß∞‹
-	sudo mkdir /usr/local/redis/log
-	sudo tee /lib/systemd/system/redis.service >/dev/null <<EOF
+    sudo apt-get update
+    sudo apt-get install -y gcc
+    #sudo apt-get install -y pkg-config
+    sudo apt-get install -y make
+    sudo wget https://download.redis.io/releases/redis-$redis_version.tar.gz
+    sudo tar xzf redis-$redis_version.tar.gz
+    cd redis-$redis_version/
+    sudo make -j
+    sudo make install PREFIX=/usr/local/redis
+    sudo mv ../redis.conf /usr/local/redis/
+    #sudo mv redis.conf /usr/local/redis/
+    #Ëá™ÂÆö‰πâÊó•ÂøóÁõÆÂΩïÔºåÂÖàÂàõÂª∫Â•ΩÁõÆÂΩïÔºå‰∏çÁÑ∂‰ºöÂêØÂä®Â§±Ë¥•
+    sudo mkdir /usr/local/redis/log
+    sudo tee /lib/systemd/system/redis.service >/dev/null <<EOF
 [Unit]
 Description=Advanced key-value store
 After=network.target
@@ -365,20 +365,20 @@ ReadWriteDirectories=-/usr/local/redis
 WantedBy=multi-user.target
 Alias=redis.service
 EOF
-	sudo systemctl daemon-reload
-	sudo systemctl start redis
-	sudo systemctl enable redis
+    sudo systemctl daemon-reload
+    sudo systemctl start redis
+    sudo systemctl enable redis
 }
 
 
 function install_apache_ab(){
-	sudo apt-get update
-	apt-get install -y apache2-utils
+    sudo apt-get update
+    apt-get install -y apache2-utils
 }
 
 function install_iperf3(){
-	sudo apt-get update
-	sudo apt install -y iperf3
+    sudo apt-get update
+    sudo apt install -y iperf3
 }
 
 function blue(){
@@ -399,110 +399,110 @@ function reload_start_menu(){
 function start_menu(){
     clear
     green "==============================================="
-    green " ΩÈ…‹: “ªº¸∞≤◊∞nginx + tomcat + redis + mysql µ»π§æﬂΩ≈±æ"
-    green " œµÕ≥: Ubuntu18.04"
+    green " ‰ªãÁªç: ‰∏ÄÈîÆÂÆâË£Önginx + tomcat + redis + mysql Á≠âÂ∑•ÂÖ∑ËÑöÊú¨"
+    green " Á≥ªÁªü: Ubuntu18.04"
     green "==============================================="
 
-    green "1. ∞≤◊∞nginx"
-    green "2. ∞≤◊∞tomcat"
-    green "3. ∞≤◊∞redis"
-    green "4. ∞≤◊∞mysql"
-    green "5. ∞≤◊∞apche ab—π≤‚π§æﬂ"
-    green "6. ∞≤◊∞iperf3¥¯øÌ≤‚ ‘π§æﬂ"
-	green "÷∏∂®∞≤◊∞∂‡∏ˆ»Ìº˛ ± ‰»Î ˝◊÷”√ø’∏Ò∏Ùø™"
-	red "0. ÕÀ≥ˆ∞≤◊∞"
+    green "1. ÂÆâË£Önginx"
+    green "2. ÂÆâË£Ötomcat"
+    green "3. ÂÆâË£Öredis"
+    green "4. ÂÆâË£Ömysql"
+    green "5. ÂÆâË£Öapche abÂéãÊµãÂ∑•ÂÖ∑"
+    green "6. ÂÆâË£Öiperf3Â∏¶ÂÆΩÊµãËØïÂ∑•ÂÖ∑"
+    green "ÊåáÂÆöÂÆâË£ÖÂ§ö‰∏™ËΩØ‰ª∂Êó∂ËæìÂÖ•Êï∞Â≠óÁî®Á©∫Ê†ºÈöîÂºÄ"
+    red "0. ÈÄÄÂá∫ÂÆâË£Ö"
     echo
 
-	read -p "«Î ‰»Î∂‘”¶µƒ±‡∫≈£¨∂‡∏ˆ±‡∫≈“‘ø’∏Ò∏Ùø™:" -a vars
-	for var in ${vars[@]};do
-	     if [ $var == 0 ];then
-    		echo "÷’÷π∞≤◊∞" >&2
-	     	exit 1
-	     fi 
-	done
-	for var in ${vars[@]};do
-	    case "$var" in
-	        1)
-			select_nginx_install_option
-	        ;;
-	        2)
-			select_tomcat_install_option
-	        ;;
-	        3)
-			select_redis_install_option
-	        ;;
-	        4)
-			select_mysql_install_option
-	        ;;
-	        5)
-			install_apache_ab_state=1
-	        ;;
-	        6)
-			install_iperf3_state=1
-	        ;;
-	    esac 
-	done
+    read -p "ËØ∑ËæìÂÖ•ÂØπÂ∫îÁöÑÁºñÂè∑ÔºåÂ§ö‰∏™ÁºñÂè∑‰ª•Á©∫Ê†ºÈöîÂºÄ:" -a vars
+    for var in ${vars[@]};do
+         if [ $var == 0 ];then
+            echo "ÁªàÊ≠¢ÂÆâË£Ö" >&2
+            exit 1
+         fi 
+    done
+    for var in ${vars[@]};do
+        case "$var" in
+            1)
+            select_nginx_install_option
+            ;;
+            2)
+            select_tomcat_install_option
+            ;;
+            3)
+            select_redis_install_option
+            ;;
+            4)
+            select_mysql_install_option
+            ;;
+            5)
+            install_apache_ab_state=1
+            ;;
+            6)
+            install_iperf3_state=1
+            ;;
+        esac 
+    done
     case "$install_nginx_state" in
         1)
-		install_nginx_online
+        install_nginx_online
         ;;
         2)
-		install_nginx
+        install_nginx
         ;;
     esac
     case "$install_tomcat_state" in
         1)
-		install_tomcat
+        install_tomcat
         ;;
     esac
     case "$install_redis_state" in
         1)
-		install_redis_online
+        install_redis_online
         ;;
         2)
-		install_redis
+        install_redis
         ;;
     esac
     case "$install_mysql_state" in
         1)
-		install_mysql
+        install_mysql
         ;;
     esac    
-	if [ $install_apache_ab_state == 1 ];then
-		install_apache_ab
-	fi  
-	if [ $install_iperf3_state == 1 ];then
-		install_iperf3
-	fi
-    green "∞≤◊∞ÕÍ≥…"
-	if [ $install_nginx_state == 1 ] || [ $install_nginx_state == 2 ];then
-		green "--------------nginx verion-------------"
-    	nginx -v
-	fi
-	if [ $install_tomcat_state == 1 ];then
-	    green "--------------java verion-------------"
-	    java -version
-	    green "--------------tomcat verion-------------"
-	    echo "tomcat $tomcat_version"
-	fi
+    if [ $install_apache_ab_state == 1 ];then
+        install_apache_ab
+    fi  
+    if [ $install_iperf3_state == 1 ];then
+        install_iperf3
+    fi
+    green "ÂÆâË£ÖÂÆåÊàê"
+    if [ $install_nginx_state == 1 ] || [ $install_nginx_state == 2 ];then
+        green "--------------nginx verion-------------"
+        nginx -v
+    fi
+    if [ $install_tomcat_state == 1 ];then
+        green "--------------java verion-------------"
+        java -version
+        green "--------------tomcat verion-------------"
+        echo "tomcat $tomcat_version"
+    fi
     case "$install_redis_state" in
         [1-2])
-	    green "--------------redis verion-------------"
-	    redis-cli -v
+        green "--------------redis verion-------------"
+        redis-cli -v
         ;;
     esac
-	if [ $install_mysql_state == 1 ];then
-	    green "--------------mysql verion-------------"
-	    mysql -V
-	fi
-	if [ $install_apache_ab_state == 1 ];then
-	    green "--------------apache ab verion-------------"
-	    ab -V
-	fi  
-	if [ $install_iperf3_state == 1 ];then
-	    green "--------------iperf3 verion-------------"
-	    iperf3 -v
-	fi
+    if [ $install_mysql_state == 1 ];then
+        green "--------------mysql verion-------------"
+        mysql -V
+    fi
+    if [ $install_apache_ab_state == 1 ];then
+        green "--------------apache ab verion-------------"
+        ab -V
+    fi  
+    if [ $install_iperf3_state == 1 ];then
+        green "--------------iperf3 verion-------------"
+        iperf3 -v
+    fi
         
 }
 
